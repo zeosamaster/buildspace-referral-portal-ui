@@ -2,13 +2,28 @@ import React from "react";
 import { ReferralContext } from "../context/ReferralContext";
 
 export function Account({ account }) {
-  const { referrals, setAccount } = React.useContext(ReferralContext);
+  const { referrals, skills, fetchReferrals } =
+    React.useContext(ReferralContext);
 
   React.useEffect(() => {
-    setAccount(account);
-  }, [setAccount, account]);
+    fetchReferrals(account);
+  }, [fetchReferrals, account]);
 
   return (
-    <span className="account-referrals">You have {referrals} referrals!</span>
+    <div className="account">
+      <span className="account-referrals">
+        You have {referrals.length} referrals!
+      </span>
+
+      <div className="skills">
+        {skills.map(([skill, count]) => {
+          return (
+            <span className="skill" key={skill}>
+              {skill}: {count}
+            </span>
+          );
+        })}
+      </div>
+    </div>
   );
 }

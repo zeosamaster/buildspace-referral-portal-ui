@@ -7,8 +7,8 @@ export function Referral({ account }) {
   const { addReferral } = React.useContext(ReferralContext);
 
   const onSubmit = React.useCallback(
-    async ({ address }) => {
-      const newCountForAddress = await addReferral(address);
+    async ({ address, skill }) => {
+      const newCountForAddress = await addReferral(address, skill);
       console.log(`${address} now has ${newCountForAddress} referrals!`);
     },
     [addReferral]
@@ -16,11 +16,18 @@ export function Referral({ account }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="address">
-        <span className="address-text">
+      <div className="form-field address">
+        <span className="form-text address-text">
           Add an address of a friend you want to praise
         </span>
-        <input className="address-input" {...register("address")} />
+        <input className="form-input address-input" {...register("address")} />
+      </div>
+
+      <div className="form-field skill">
+        <span className="form-text skill-text">
+          What's the skill you'd like to praise?
+        </span>
+        <input className="form-input skill-input" {...register("skill")} />
       </div>
 
       <button className="cta-button refer-button" type="submit">

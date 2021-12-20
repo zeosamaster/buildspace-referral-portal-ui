@@ -19,18 +19,43 @@ body {
   margin-top: 64px;
 }
 
-.address {
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-referrals {
+  margin-top: 24px;
+}
+
+.skills {
+  padding: 10px 0;
+}
+
+.skills .skill {
+  background: lightblue;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+form {
   margin-top: 32px;
+}
+
+.form-field {
+  margin-bottom: 16px;
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-.address-text {
+.form-field .form-text {
   font-size: 24px;
 }
 
-.address-input {
+.form-field .form-input {
   margin-top: 16px;
   border: 0;
   width: 50%;
@@ -51,10 +76,6 @@ body {
   text-align: center;
   font-size: 32px;
   font-weight: 600;
-}
-
-.account-referrals {
-  margin-top: 24px;
 }
 
 form {
