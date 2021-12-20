@@ -52,6 +52,11 @@ body {
   font-weight: 600;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 .cta-button {
   cursor: pointer;
   margin-top: 16px;
