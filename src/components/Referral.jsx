@@ -1,10 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { ReferralContext } from "../context/ReferralContext";
 
 export function Referral({ account }) {
   const { register, handleSubmit } = useForm();
+  const { addReferral } = React.useContext(ReferralContext);
 
-  const onSubmit = React.useCallback(({ address }) => {}, []);
+  const onSubmit = React.useCallback(
+    async ({ address }) => {
+      const newCountForAddress = await addReferral(address);
+      console.log(`${address} now has ${newCountForAddress} referrals!`);
+    },
+    [addReferral]
+  );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

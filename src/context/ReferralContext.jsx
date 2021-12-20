@@ -10,6 +10,7 @@ const contract = getContract(
 
 export const ReferralContext = React.createContext({
   setAccount: async () => 0,
+  addReferral: async () => 0,
 });
 
 export function ReferralContextProvider({ children }) {
@@ -24,7 +25,14 @@ export function ReferralContextProvider({ children }) {
     }
   }, []);
 
-  const value = { referrals, setAccount };
+  const addReferral = React.useCallback(async (address) => {
+    const tx = await contract.addReferral(address);
+    await tx.wait();
+
+    return await contract.getReferrals(address);
+  }, []);
+
+  const value = { referrals, setAccount, addReferral };
 
   return (
     <ReferralContext.Provider value={value}>
