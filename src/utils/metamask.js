@@ -1,4 +1,4 @@
-// import { ethers } from "ethers";
+import { ethers } from "ethers";
 
 export const CHAINS = {
   RINKEBY_CHAIN_ID: "0x4",
@@ -14,11 +14,11 @@ function getEthereum() {
   return ethereum;
 }
 
-// export const getContract = (contractId, abi) => {
-//   const provider = new ethers.providers.Web3Provider(getEthereum());
-//   const signer = provider.getSigner();
-//   return new ethers.Contract(contractId, abi, signer);
-// };
+export const getContract = (contractId, abi) => {
+  const provider = new ethers.providers.Web3Provider(getEthereum());
+  const signer = provider.getSigner();
+  return new ethers.Contract(contractId, abi, signer);
+};
 
 export const getConnectedAccount = async () => {
   const accounts = await getEthereum().request({ method: "eth_accounts" });

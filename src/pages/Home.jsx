@@ -3,6 +3,8 @@ import React from "react";
 import { WalletContext } from "../context/WalletContext";
 import { ConnectWalletButton } from "../components/ConnectWalletButton";
 import { Referral } from "../components/Referral";
+import { ReferralContextProvider } from "../context/ReferralContext";
+import { Account } from "../components/Account";
 
 export function Home() {
   const { account, connect } = React.useContext(WalletContext);
@@ -19,7 +21,12 @@ export function Home() {
 
         {!account && <ConnectWalletButton connectWallet={connect} />}
 
-        {account && <Referral account={account} />}
+        {account && (
+          <ReferralContextProvider>
+            <Account account={account} />
+            <Referral account={account} />
+          </ReferralContextProvider>
+        )}
       </div>
     </div>
   );
