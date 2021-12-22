@@ -8,8 +8,7 @@ export function Referral({ account }) {
 
   const onSubmit = React.useCallback(
     async ({ address, skill }) => {
-      const newCountForAddress = await addReferral(address, skill);
-      console.log(`${address} now has ${newCountForAddress} referrals!`);
+      await addReferral(address, skill);
     },
     [addReferral]
   );

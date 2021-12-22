@@ -19,7 +19,12 @@ export function ReferralContextProvider({ children }) {
   const fetchReferrals = React.useCallback(async (address) => {
     try {
       const refs = await contract.getReferrals(address);
-      setReferrals(refs);
+      setReferrals(
+        refs.map((r) => ({
+          ...r,
+          timestamp: new Date(r.timestamp.toNumber() * 1000),
+        }))
+      );
     } catch (error) {
       setReferrals([]);
     }
@@ -28,9 +33,6 @@ export function ReferralContextProvider({ children }) {
   const addReferral = React.useCallback(async (address, skill) => {
     const tx = await contract.addReferral(address, skill);
     await tx.wait();
-
-    const result = await contract.getReferrals(address);
-    return result.length;
   }, []);
 
   const skills = React.useMemo(() => {
@@ -43,6 +45,20 @@ export function ReferralContextProvider({ children }) {
 
     return Object.entries(skillMap);
   }, [referrals]);
+
+  React.useEffect(() => {
+    const onNewReferral = (from, to, skill) => {
+      const newReferral = { referral: to, skill, timestamp: new Date() };
+      console.log("A new referral was performed", newReferral);
+      setReferrals((prevState) => [...prevState, newReferral]);
+    };
+
+    contract.on("NewReferral", onNewReferral);
+
+    return () => {
+      contract.off("NewReferral", onNewReferral);
+    };
+  }, []);
 
   const value = { referrals, skills, fetchReferrals, addReferral };
 
