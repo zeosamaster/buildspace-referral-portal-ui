@@ -2,7 +2,7 @@ import React from "react";
 import { getContract } from "../utils/metamask";
 import REFERRAL_CONTRACT_JSON from "../contracts/ReferralPortal.json";
 
-const REFERRAL_CONTRACT_ADDRESS = "0xc6475e5c7537c3e0CF88271e20b4c671851A2318";
+const REFERRAL_CONTRACT_ADDRESS = "0x6f4666e18b9Fb141f9b9c5dcb8A29A7ABaD7e89b";
 const contract = getContract(
   REFERRAL_CONTRACT_ADDRESS,
   REFERRAL_CONTRACT_JSON.abi
